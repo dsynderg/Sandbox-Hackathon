@@ -10,11 +10,11 @@ if st.button("← Back to Home", key="back_tutor"):
 st.title("🤖 Tutor Chatbot")
 
 # Load system prompt from hardcoded markdown file path
-# try:
-#     system_prompt = Path("../../Dexter/Tutor.md").read_text(encoding="utf-8")
-# except Exception as e:
-#     system_prompt = ""
-#     st.warning(f"Could not load system prompt: {e}")
+try:
+    system_prompt = Path("../../Dexter/Tutor.md").read_text(encoding="utf-8")
+except Exception as e:
+    system_prompt = ""
+    st.warning(f"Could not load system prompt: {e}")
 
 # initialize OpenAI client using environment variable or Streamlit secrets
 API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
