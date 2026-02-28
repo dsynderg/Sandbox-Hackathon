@@ -2,6 +2,10 @@ import os
 import streamlit as st
 from openai import OpenAI
 
+# Add back button at the top
+if st.button("← Back to Home", key="back_tutor"):
+    st.switch_page("streamlit_app.py")
+
 st.title("🤖 Tutor Chatbot")
 
 # initialize OpenAI client using environment variable or Streamlit secrets
