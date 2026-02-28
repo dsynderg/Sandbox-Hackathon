@@ -168,7 +168,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser('ChatBot')
     parser.add_argument('prompt_file', nargs='?', type=Path, default=None)
     parser.add_argument('--web', action='store_true')
-    parser.add_argument('--model', default='gpt-5-nano')
+    parser.add_argument('--model', default='gpt-4.1-nano')
     parser.add_argument('--show-reasoning', action='store_true', default=True)
     parser.add_argument('--reasoning-effort', default='low')
     args = parser.parse_args()
