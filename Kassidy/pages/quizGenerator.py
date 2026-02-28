@@ -9,6 +9,34 @@ if st.button("← Back to Home"):
 
 st.title("✏️ Quiz Generator")
 
+# Add MathJax for LaTeX rendering
+mathjax_script = """
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+        displayMath: [['$$', '$$'], ['\\\\[', '\\\\]'], ['[', ']']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      startup: {
+        pageReady: async () => {
+          await MathJax.typesetPromise();
+          const observer = new MutationObserver(async (mutations) => {
+            await MathJax.typesetPromise();
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+    </script>
+    """
+st.markdown(mathjax_script, unsafe_allow_html=True)
+
 # Load system prompt from quiz_maker_prompt.md
 try:
     # Get the project root by going up from current file location
