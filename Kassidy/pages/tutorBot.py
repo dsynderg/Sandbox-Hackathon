@@ -1,12 +1,20 @@
 import os
 import streamlit as st
 from openai import OpenAI
+from pathlib import Path
 
 # Add back button at the top
 if st.button("← Back to Home", key="back_tutor"):
     st.switch_page("streamlit_app.py")
 
 st.title("🤖 Tutor Chatbot")
+
+# Load system prompt from hardcoded markdown file path
+# try:
+#     system_prompt = Path("../../Dexter/Tutor.md").read_text(encoding="utf-8")
+# except Exception as e:
+#     system_prompt = ""
+#     st.warning(f"Could not load system prompt: {e}")
 
 # initialize OpenAI client using environment variable or Streamlit secrets
 API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
@@ -37,11 +45,16 @@ if prompt := st.chat_input("What is on your mind?"):
 
     # call OpenAI to get a response
     try:
-        result = client.responses.create(
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.extend(st.session_state.tutor_messages)
+        
+        result = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            input=prompt,
+            messages=messages,
         )
-        response = result.output_text
+        response = result.choices[0].message.content
     except Exception as e:
         response = f"Error contacting OpenAI: {e}"
 
