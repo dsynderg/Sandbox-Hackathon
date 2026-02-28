@@ -21,7 +21,7 @@ rad.json
 #Test results file
 TestResults.xml
 
-<<<<<<< HEAD
+
 .env
 .streamlit/secrets.toml
 .DS_Store

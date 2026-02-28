@@ -10,7 +10,7 @@
         /* Custom Teal Green Theme */
         :root {
             --teal-green: #008080;
-            --teal-hover: #006666;
+            --teal-hover: #006646;
         }
 
         .bg-teal {
@@ -37,13 +37,32 @@
         .nav-link:hover {
             opacity: 0.8;
         }
+        .text-custom-seafoam{
+          color:#019da4
+        }
+        .text-custom-light_sf{
+          color:#01b9a1
+        }
+        .text-custom-dark_sf{
+          color:#1d9c91
+
+        }
+        .text-custom-light_g{
+          color:#04cfa5
+
+        }
+        .student-frame {
+  
+    border: 2px solid #000000 !important; 
+    border-radius: 12px; 
+}
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg bg-teal navbar-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Educator AI</a>
+            <a class="navbar-brand fw-bold" href="#">Textbook AI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -63,11 +82,140 @@
             <h1 class="display-4 fw-bold">The Future of AI Education</h1>
             <p class="lead mb-4">Empowering tutors and students with intelligent, real-time collaboration.</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-teal btn-lg px-4 gap-3">Get Started</button>
+                <a href="https://textbookai.streamlit.app/" class="btn btn-teal btn-lg px-4 gap-3">Get Started</a>
                 <button type="button" class="btn btn-outline-secondary btn-lg px-4">Learn More</button>
             </div>
         </div>
     </header>
+    <section id="mission" class="py-5 bg-white">
+      <div class="container py-5">
+          <div class="row align-items-center">
+              <div class="col-lg-6">
+                  <h6 class="text-teal fw-bold text-uppercase mb-3">Our Mission</h6>
+                  <h2 class="display-5 fw-bold mb-4">Bridging the Gap Between Technology and Understanding</h2>
+                  <p class="lead text-muted mb-4">
+                      At Textbook AI, we believe every student deserves a world-class tutor in their pocket. Our mission is to democratize education by providing personalized, real-time AI guidance that adapts to every unique learning style.
+                  </p>
+                  <ul class="list-unstyled mb-4">
+                      <li class="mb-2"><i class="text-teal me-2">✔</i> 24/7 Access to specialized knowledge</li>
+                      <li class="mb-2"><i class="text-teal me-2">✔</i> Safe, moderated AI interactions</li>
+                      <li class="mb-2"><i class="text-teal me-2">✔</i> Empowering teachers, not replacing them</li>
+                  </ul>
+                  <button class="btn btn-teal px-4">Read Our Manifesto</button>
+              </div>
+              
+              <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="rounded-5 shadow-sm overflow-hidden d-flex" 
+                     style="min-height: 400px; border: 2px dashed var(--teal-green); position: relative;">
+                     
+                    <img src="https://plus.unsplash.com/premium_photo-1681248156433-29d19648846f?w=800&auto=format&fit=crop&q=60" 
+                         alt="Teacher teaching student"
+                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                         
+                </div>
+            </div>
+              </div>
+          </div>
+      </div>
+  </section>
+    <section class="py-5">
+      <div class="container">
+          <div class="text-center mb-5">
+              <h2 class="fw-bold">Meet Your AI Tutors</h2>
+              <p class="text-muted">Personalized learning paths guided by specialized intelligence.</p>
+          </div>
+  
+          <div class="row g-4">
+              <div class="col-md-4">
+                  <div class="card h-100 border-0 shadow-sm text-center p-3">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <span class="display-5 text-teal">∑</span>
+                          </div>
+                          <h3 class="h5 card-title fw-bold">Dr. Algorithm</h3>
+                          <p class="card-text text-muted">Specializes in advanced Calculus and Linear Algebra. Patient, precise, and logical.</p>
+                          <a href="#" class="btn btn-outline-teal btn-sm">Chat Now</a>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="col-md-4">
+                  <div class="card h-100 border-0 shadow-sm text-center p-3">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <span class="display-5 text-teal">✎</span>
+                          </div>
+                          <h3 class="h5 card-title fw-bold">Professor Prose</h3>
+                          <p class="card-text text-muted">A master of creative writing and literary analysis. Creative, insightful, and poetic.</p>
+                          <a href="#" class="btn btn-outline-teal btn-sm">Analyze Essay</a>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="col-md-4">
+                  <div class="card h-100 border-0 shadow-sm text-center p-3">
+                      <div class="card-body">
+                          <div class="mb-3">
+                              <span class="display-5 text-teal">&lt;/&gt;</span>
+                          </div>
+                          <h3 class="h5 card-title fw-bold">Binary Ben</h3>
+                          <p class="card-text text-muted">Your guide to Python and Web Development. Helpful, witty, and a great debugger.</p>
+                          <a href="#" class="btn btn-outline-teal btn-sm">Start Coding</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <section id="students" class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Meet Your Students</h2>
+            <p class="lead text-muted">Master a topic by teaching it to our diverse AI learners. Who will you mentor today?</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 student-frame shadow-sm overflow-hidden">
+                    <div class="card-body p-4">
+                        <h3 class="h5 fw-bold mb-1">Gabriella</h3>
+                        <p class="text-primary small mb-3"><em>Personality: Eager & Attentive</em></p>
+                        <p class="card-text text-custom-teal">Gabriella loves learning but gets confused by big words. He asks simple questions and is easy to encourage.</p>
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-outline-primary">Start Teaching</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 student-frame shadow-sm overflow-hidden">
+                    <div class="card-body p-4">
+                        <h3 class="h5 fw-bold mb-1">Sam</h3>
+                        <p class="text-primary small mb-3"><em>Personality: Easily confused, But very eager </em></p>
+                        <p class="card-text text-custom-teal">Sam is very excited to learn, but in his pursuit of knowledge, he makes a lot of mistakes</p>
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-outline-primary text-primary">Start Teaching</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 student-frame shadow-sm overflow-hidden">
+                  <div class="card-body p-4">
+                      <h3 class="h5 fw-bold mb-1">Martin</h3>
+                      <p class="text-primary small mb-3"><em>Personality: Critical & Analytical</em></p>
+                      <p class="card-text text-custom-teal">Martin won't believe you just because you said so. He demands logic and proof</p>
+                      <div class="d-grid mt-4">
+                          <button class="btn btn-outline-primary">Start Teaching</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.min.js"></script>
 </body>
