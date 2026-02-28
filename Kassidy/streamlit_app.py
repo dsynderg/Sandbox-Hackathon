@@ -7,14 +7,16 @@ st.set_page_config(page_title="My AI App", layout="wide")
 if "pages" in os.path.abspath(__file__):
     st.stop()
 
-# Custom CSS for button hover effect
+# Custom CSS for buttons and other elements
 st.markdown("""
     <style>
-    /* Target Streamlit buttons */
-    div.stButton > button:hover {
-        background-color: #35e8d3 !important;
-        border-color: #35e8d3 !important;
-        color: #000000 !important;
+    /* Apply Times New Roman to all buttons */
+    button {
+        font-family: "Times New Roman", Times, serif !important;
+    }
+    /* Apply Times New Roman to text inputs */
+    input {
+        font-family: "Times New Roman", Times, serif !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -31,14 +33,14 @@ st.write("")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:
-    st.markdown("<h1 style='text-align: center;'>Tutor AI</h1>",
+    st.markdown("<h1 style='text-align: center; font-family: \"Times New Roman\", Times, serif;'>Textbook AI</h1>",
                 unsafe_allow_html=True)
 
 # Add more vertical spacing
 st.write("")
 st.write("")
 
-# Create centered buttons in same column
+# Create centered buttons
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:
