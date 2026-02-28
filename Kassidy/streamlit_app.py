@@ -18,6 +18,17 @@ st.markdown("""
     input {
         font-family: "Times New Roman", Times, serif !important;
     }
+    /* Style main navigation buttons - lighter than background */
+    div.stButton > button[kind="primary"],
+    div.stButton > button {
+        background-color: #26b8bd !important;
+        border-color: #26b8bd !important;
+    }
+    /* Hover effect - grayer version */
+    div.stButton > button:hover {
+        background-color: #4a9fa4 !important;
+        border-color: #4a9fa4 !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 

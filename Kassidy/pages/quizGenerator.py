@@ -20,6 +20,16 @@ st.markdown("""
     [data-testid="stChatMessageAvatarAssistant"] {
         background-color: #8ff2e3 !important;
     }
+    /* Style back button - lighter than background */
+    div.stButton > button {
+        background-color: #26b8bd !important;
+        border-color: #26b8bd !important;
+    }
+    /* Hover effect - grayer version */
+    div.stButton > button:hover {
+        background-color: #4a9fa4 !important;
+        border-color: #4a9fa4 !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
