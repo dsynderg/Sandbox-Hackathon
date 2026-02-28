@@ -25,3 +25,5 @@ TestResults.xml
 .env
 .streamlit/secrets.toml
 .DS_Store
+Dexter/chapter_1_textbook.txt
+Dexter/chapter_1_textbook_formatted.txt
