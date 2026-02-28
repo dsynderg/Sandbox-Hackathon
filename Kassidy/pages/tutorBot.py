@@ -3,18 +3,6 @@ import streamlit as st
 from openai import OpenAI
 from pathlib import Path
 
-# Apply Times New Roman font to all text
-st.markdown("""
-    <style>
-    * {
-        font-family: "Times New Roman", Times, serif !important;
-    }
-    button, input, textarea {
-        font-family: "Times New Roman", Times, serif !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
 # Add back button at the top
 if st.button("← Back to Home", key="back_tutor"):
     st.switch_page("streamlit_app.py")
