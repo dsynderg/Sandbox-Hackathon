@@ -1,6 +1,11 @@
 import streamlit as st
+import os
 
 st.set_page_config(page_title="My AI App", layout="wide")
+
+# Check if we're running from the pages folder
+if "pages" in os.path.abspath(__file__):
+    st.stop()
 
 # Add vertical spacing to center buttons
 st.write("")
@@ -14,7 +19,8 @@ st.write("")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:
-    st.markdown("<h1 style='text-align: center;'>Tutor AI</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Tutor AI</h1>",
+                unsafe_allow_html=True)
 
 # Add more vertical spacing
 st.write("")
