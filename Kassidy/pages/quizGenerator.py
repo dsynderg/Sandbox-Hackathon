@@ -9,6 +9,20 @@ if st.button("← Back to Home"):
 
 st.title("✏️ Quiz Generator")
 
+# Custom CSS for user icon color
+st.markdown("""
+    <style>
+    /* Change user chat icon color */
+    [data-testid="stChatMessageAvatarUser"] {
+        background-color: #35e8d3 !important;
+    }
+    /* Change bot/assistant chat icon color - even lighter */
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background-color: #8ff2e3 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Add MathJax for LaTeX rendering
 mathjax_script = """
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
