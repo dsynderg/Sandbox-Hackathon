@@ -7,6 +7,18 @@ st.set_page_config(page_title="My AI App", layout="wide")
 if "pages" in os.path.abspath(__file__):
     st.stop()
 
+# Custom CSS for button hover effect
+st.markdown("""
+    <style>
+    /* Target Streamlit buttons */
+    div.stButton > button:hover {
+        background-color: #35e8d3 !important;
+        border-color: #35e8d3 !important;
+        color: #000000 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Add vertical spacing to center buttons
 st.write("")
 st.write("")
