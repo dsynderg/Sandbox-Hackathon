@@ -2,6 +2,10 @@ import os
 import streamlit as st
 from openai import OpenAI
 
+# Add back button at the top
+if st.button("← Back to Home"):
+    st.switch_page("streamlit_app.py")
+
 st.title("Quiz Generator")
 
 # initialize OpenAI client using environment variable or Streamlit secrets
