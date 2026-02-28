@@ -40,6 +40,7 @@ if "student_messages" not in st.session_state:
     st.session_state.student_messages = []
 
 # Display chat messages from history on app rerun
+# Note: st.markdown() supports LaTeX! Use $...$ for inline math and $$...$$ for block math
 for message in st.session_state.student_messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
@@ -60,7 +61,7 @@ if prompt := st.chat_input("Teach me something!"):
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.extend(st.session_state.student_messages)
-        
+
         result = client.chat.completions.create(
             model="gpt-4.1-nano",
             messages=messages,

@@ -40,6 +40,7 @@ if "tutor_messages" not in st.session_state:
     st.session_state.tutor_messages = []
 
 # Display chat messages from history on app rerun
+# Note: st.markdown() supports LaTeX! Use $...$ for inline math and $$...$$ for block math
 for message in st.session_state.tutor_messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
