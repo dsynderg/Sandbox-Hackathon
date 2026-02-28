@@ -22,7 +22,7 @@ st.title("🤖 Tutor Chatbot")
 try:
     # Get the project root by going up from current file location
     current_dir = Path(__file__).parent.parent.parent
-    tutor_md_path = current_dir / "Dexter" / "Tutor.md"
+    tutor_md_path = current_dir / "Dexter" / "Teacher_prompt.md"
     system_prompt = tutor_md_path.read_text(encoding="utf-8")
 except Exception as e:
     system_prompt = ""
