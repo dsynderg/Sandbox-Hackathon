@@ -1,87 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Textbook AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator AI Prototype</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Custom Teal Green Theme */
+        :root {
+            --teal-green: #008080;
+            --teal-hover: #006666;
+        }
 
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        .bg-teal {
+            background-color: var(--teal-green) !important;
+        }
+
+        .btn-teal {
+            background-color: var(--teal-green);
+            color: white;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-teal:hover {
+            background-color: var(--teal-hover);
+            color: white;
+        }
+
+        .nav-link {
+            color: white !important;
+            margin-right: 15px;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">MySite</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="bg-light text-center py-5">
-    <div class="container">
-      <h1 class="display-4">Welcome to My Website</h1>
-      <p class="lead">This site was built using HTML and Bootstrap 5.</p>
-      <a href="#" class="btn btn-primary btn-lg">Learn More</a>
-    </div>
-  </section>
-
-  <!-- Cards Section -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Feature One</h5>
-              <p class="card-text">Bootstrap makes building responsive sites easy and fast.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
+    <nav class="navbar navbar-expand-lg bg-teal navbar-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Educator AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Mission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Meet Your Tutors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Meet Your Students</a></li>
+                </ul>
             </div>
-          </div>
         </div>
+    </nav>
 
-        <div class="col-md-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Feature Two</h5>
-              <p class="card-text">Grid layouts automatically adjust to screen sizes.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
+    <header class="py-5 text-center bg-light">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold">The Future of AI Education</h1>
+            <p class="lead mb-4">Empowering tutors and students with intelligent, real-time collaboration.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn btn-teal btn-lg px-4 gap-3">Get Started</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Learn More</button>
             </div>
-          </div>
         </div>
+    </header>
 
-        <div class="col-md-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Feature Three</h5>
-              <p class="card-text">Prebuilt components save tons of development time.</p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p class="mb-0">© 2026 MySite. All rights reserved.</p>
-  </footer>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.min.js"></script>
 </body>
 </html>
