@@ -4,15 +4,27 @@
 import argparse
 import asyncio
 from pathlib import Path
+from typing import Optional
 
 import gradio as gr
 from openai import AsyncOpenAI
 
 from usage import print_usage, format_usage_markdown
+from chroma_db import query_textbook
 
 
 class ChatAgent:
-    def __init__(self, model: str, prompt: str, show_reasoning: bool, reasoning_effort: str | None):
+    def __init__(
+        self,
+        model: str,
+        prompt: str,
+        show_reasoning: bool,
+        reasoning_effort: str | None,
+        collection_name: Optional[str] = None,
+        chapter: Optional[str] = None,
+        db_path: Optional[str] = None,
+        top_k: int = 3
+    ):
         self._ai = AsyncOpenAI()
         self.model = model
         self.show_reasoning = show_reasoning
@@ -25,13 +37,54 @@ class ChatAgent:
         self.usage = []
         self.usage_markdown = format_usage_markdown(self.model, [])
 
+        # Database parameters
+        self.collection_name = collection_name
+        self.chapter = chapter
+        self.db_path = db_path
+        self.top_k = top_k
+        self.use_rag = collection_name is not None
+
         self._history = []
         self._prompt = prompt
         if prompt:
             self._history.append({'role': 'system', 'content': prompt})
 
+    def _augment_with_rag(self, user_message: str) -> str:
+        """Query the textbook database and augment the message with relevant context."""
+        if not self.use_rag:
+            return user_message
+        
+        try:
+            results = query_textbook(
+                collection_name=self.collection_name,
+                query_text=user_message,
+                chapter=self.chapter,
+                top_k=self.top_k,
+                persist_dir=self.db_path
+            )
+            
+            # Build context from results
+            context_parts = []
+            if results['documents'] and results['documents'][0]:
+                context_parts.append("Relevant textbook content:")
+                context_parts.append("-" * 50)
+                for doc, metadata in zip(results['documents'][0], results['metadatas'][0]):
+                    context_parts.append(f"[{metadata.get('section', 'Unknown')} - {metadata.get('subsection', 'Unknown')}]")
+                    context_parts.append(doc)
+                    context_parts.append("-" * 50)
+                
+                context = "\n".join(context_parts)
+                augmented_message = f"{user_message}\n\nContext from textbook:\n{context}"
+                return augmented_message
+        except Exception as e:
+            print(f"Warning: Failed to query database: {e}")
+        
+        return user_message
+
     async def get_response(self, user_message: str):
-        self._history.append({'role': 'user', 'content': user_message})
+        # Augment user message with textbook context if RAG is enabled
+        augmented_message = self._augment_with_rag(user_message)
+        self._history.append({'role': 'user', 'content': augmented_message})
 
         stream = self._ai.responses.stream(
             input=self._history,
@@ -174,13 +227,25 @@ def _main_gradio(agent_args):
     demo.launch()
 
 
-def main(prompt_path: Path, model: str, show_reasoning, reasoning_effort: str | None, use_web: bool):
+def main(
+    prompt_path: Path,
+    model: str,
+    show_reasoning,
+    reasoning_effort: str | None,
+    use_web: bool,
+    collection_name: Optional[str] = None,
+    chapter: Optional[str] = None,
+    db_path: Optional[str] = None
+):
     agent_args = dict(
         model=model,
         prompt=prompt_path.read_text() if prompt_path else '',
         show_reasoning=show_reasoning,
-        reasoning_effort=reasoning_effort
-
+        reasoning_effort=reasoning_effort,
+        collection_name=collection_name,
+        chapter=chapter,
+        db_path=db_path,
+        top_k=3
     )
 
     if use_web:
@@ -197,5 +262,17 @@ if __name__ == "__main__":
     parser.add_argument('--model', default='gpt-5-nano')
     parser.add_argument('--show-reasoning', action='store_true', default=True)
     parser.add_argument('--reasoning-effort', default='low')
+    parser.add_argument('--collection', default='chapter-1-functions', help='Chroma collection name for RAG')
+    parser.add_argument('--chapter', default=None, help='Filter results by chapter')
+    parser.add_argument('--db-path', default='./chroma_db_persistent', help='Path to Chroma database')
     args = parser.parse_args()
-    main(args.prompt_file, args.model, args.show_reasoning, args.reasoning_effort, args.web)
+    main(
+        args.prompt_file,
+        args.model,
+        args.show_reasoning,
+        args.reasoning_effort,
+        args.web,
+        collection_name=args.collection,
+        chapter=args.chapter,
+        db_path=args.db_path
+    )

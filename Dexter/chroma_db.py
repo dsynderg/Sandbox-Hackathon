@@ -85,4 +85,72 @@ def add_to_database(
     embedding_function = get_openai_embedding_function(embedding_model)
     collection = get_or_create_collection(client, collection_name, embedding_function)
     add_embeddings_with_metadata(collection, ids, documents, metadatas)
+
+
+def query_collection(
+    collection,
+    query_text: str,
+    chapter: Optional[str] = None,
+    top_k: int = 5
+) -> dict:
+    """Query a Chroma collection with optional chapter filtering.
+    
+    Args:
+        collection: Chroma collection to query
+        query_text: The search query text
+        chapter: Optional chapter to filter by (filters metadata['chapter'])
+        top_k: Number of top results to return (default: 5)
+    
+    Returns:
+        Dictionary with query results including:
+        - ids: Document IDs
+        - documents: Document content
+        - metadatas: Document metadata (chapter, section, subsection)
+        - distances: Distance scores
+    """
+    where_filter = None
+    if chapter:
+        where_filter = {"chapter": chapter}
+    
+    results = collection.query(
+        query_texts=[query_text],
+        n_results=top_k,
+        where=where_filter
+    )
+    
+    return results
+
+
+def query_textbook(
+    collection_name: str,
+    query_text: str,
+    chapter: Optional[str] = None,
+    top_k: int = 5,
+    persist_dir: Optional[str] = None
+) -> dict:
+    """Query the textbook database with optional chapter filtering.
+    
+    Convenience function that handles client/collection setup.
+    
+    Args:
+        collection_name: Name of the collection to query (e.g., "chapter-1-functions")
+        query_text: The search query text
+        chapter: Optional chapter to filter results by
+        top_k: Number of top results to return (default: 5)
+        persist_dir: Path to persistent database (if None, uses env var or in-memory)
+    
+    Returns:
+        Query results with ids, documents, metadatas, and distances
+    
+    Example:
+        results = query_textbook(
+            collection_name="chapter-1-functions",
+            query_text="How do derivatives work?",
+            chapter="Chapter 1: Derivatives",
+            top_k=3
+        )
+    """
+    client = get_chroma_client(persist_dir)
+    collection = get_or_create_collection(client, collection_name)
+    return query_collection(collection, query_text, chapter, top_k)
     
