@@ -8,11 +8,18 @@ if st.button("← Back to Home", key="back_student"):
 
 st.title("🤖 Student Chatbot")
 
-# initialize OpenAI client using environment variable or Streamlit secrets
-API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
+# Get API key from session state (user input) only, or fall back to environment/secrets for local dev
+API_KEY = st.session_state.get("user_api_key", None)
+if not API_KEY:
+    # Try environment/secrets as fallback (for local development)
+    API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get(
+        "OPENAI_API_KEY", None)
+
 if not API_KEY:
     st.error(
-        "Missing OpenAI API key. Set OPENAI_API_KEY in your environment or secrets.toml")
+        "⚠️ Missing OpenAI API key. Please go back to the home page and enter your API key.")
+    if st.button("← Back to Home"):
+        st.switch_page("streamlit_app.py")
     st.stop()
 
 client = OpenAI(api_key=API_KEY)

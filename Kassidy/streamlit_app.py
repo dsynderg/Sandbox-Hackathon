@@ -50,3 +50,36 @@ with col2:
 
     if st.button("Quiz", use_container_width=True, key="quiz_btn"):
         st.switch_page("pages/quizGenerator.py")
+
+# Add spacing before API key input
+st.write("")
+st.write("")
+
+# API Key input field
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:
+    # Check if API key is already saved in session state
+    if "user_api_key" not in st.session_state or not st.session_state.user_api_key:
+        # Show input field if no API key is saved
+        api_key_input = st.text_input(
+            "Enter your OpenAI API Key:",
+            type="password",
+            placeholder="sk-...",
+            help="Your API key will only be stored for this session",
+            key="api_input"
+        )
+
+        # Button to save the API key
+        if st.button("Save API Key", use_container_width=True):
+            if api_key_input and api_key_input.startswith("sk-"):
+                st.session_state.user_api_key = api_key_input
+                st.rerun()  # Refresh to hide the input field
+            else:
+                st.error("Please enter a valid OpenAI API key (starts with 'sk-')")
+    else:
+        # Show confirmation message when key is saved
+        st.success("✓ API Key saved for this session")
+        if st.button("Clear API Key", use_container_width=True):
+            del st.session_state.user_api_key
+            st.rerun()

@@ -10,17 +10,27 @@ if st.button("← Back to Home", key="back_tutor"):
 st.title("🤖 Tutor Chatbot")
 
 # Load system prompt from hardcoded markdown file path
-# try:
-#     system_prompt = Path("../../Dexter/Tutor.md").read_text(encoding="utf-8")
-# except Exception as e:
-#     system_prompt = ""
-#     st.warning(f"Could not load system prompt: {e}")
+try:
+    # Get the project root by going up from current file location
+    current_dir = Path(__file__).parent.parent.parent
+    tutor_md_path = current_dir / "Dexter" / "Tutor.md"
+    system_prompt = tutor_md_path.read_text(encoding="utf-8")
+except Exception as e:
+    system_prompt = ""
+    st.warning(f"Could not load system prompt: {e}")
 
-# initialize OpenAI client using environment variable or Streamlit secrets
-API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
+# Get API key from session state (user input) only, or fall back to environment/secrets for local dev
+API_KEY = st.session_state.get("user_api_key", None)
+if not API_KEY:
+    # Try environment/secrets as fallback (for local development)
+    API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get(
+        "OPENAI_API_KEY", None)
+
 if not API_KEY:
     st.error(
-        "Missing OpenAI API key. Set OPENAI_API_KEY in your environment or secrets.toml")
+        "⚠️ Missing OpenAI API key. Please go back to the home page and enter your API key.")
+    if st.button("← Back to Home"):
+        st.switch_page("streamlit_app.py")
     st.stop()
 
 client = OpenAI(api_key=API_KEY)
@@ -49,7 +59,7 @@ if prompt := st.chat_input("What is on your mind?"):
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.extend(st.session_state.tutor_messages)
-        
+
         result = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
