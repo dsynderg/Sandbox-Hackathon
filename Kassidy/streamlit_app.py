@@ -32,8 +32,19 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# Add dropdown in top right corner
+col_space, col_dropdown = st.columns([7, 1])
+
+with col_dropdown:
+    subject = st.selectbox(
+        "Subject",
+        ["Math", "English", "Spelling", "Grammar",
+            "Finance", "History", "Biology", "Chemistry"],
+        index=0,
+        label_visibility="collapsed"
+    )
+
 # Add vertical spacing to center buttons
-st.write("")
 st.write("")
 st.write("")
 st.write("")
