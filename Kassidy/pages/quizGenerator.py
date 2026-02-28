@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from openai import OpenAI
+from pathlib import Path
 
 # Apply Times New Roman font to buttons
 st.markdown("""
@@ -16,6 +17,16 @@ if st.button("← Back to Home"):
     st.switch_page("streamlit_app.py")
 
 st.title("Quiz Generator")
+
+# Load system prompt from quiz_maker_prompt.md
+try:
+    # Get the project root by going up from current file location
+    current_dir = Path(__file__).parent.parent.parent
+    quiz_md_path = current_dir / "Dexter" / "quiz_maker_prompt.md"
+    system_prompt = quiz_md_path.read_text(encoding="utf-8")
+except Exception as e:
+    system_prompt = ""
+    st.warning(f"Could not load system prompt: {e}")
 
 # Get API key from session state (user input) only, or fall back to environment/secrets for local dev
 API_KEY = st.session_state.get("user_api_key", None)
@@ -54,11 +65,16 @@ if prompt := st.chat_input("What is on your mind?"):
 
     # call OpenAI to get a response
     try:
-        result = client.responses.create(
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.extend(st.session_state.quiz_messages)
+        
+        result = client.chat.completions.create(
             model="gpt-4.1-nano",
-            input=prompt,
+            messages=messages,
         )
-        response = result.output_text
+        response = result.choices[0].message.content
     except Exception as e:
         response = f"Error contacting OpenAI: {e}"
 
