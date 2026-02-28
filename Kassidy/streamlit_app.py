@@ -2,5 +2,33 @@ import streamlit as st
 
 st.set_page_config(page_title="My AI App", layout="wide")
 
-st.title("Welcome to My Multi-Page App")
-st.write("Use the sidebar to navigate between the Chatbot and Settings.")
+# Add vertical spacing to center buttons
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
+
+# Create centered column layout
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:
+    st.markdown("<h1 style='text-align: center;'>Tutor AI</h1>", unsafe_allow_html=True)
+
+# Add more vertical spacing
+st.write("")
+st.write("")
+
+# Create centered buttons in same column
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:
+    if st.button("Tutor", use_container_width=True, key="tutor_btn"):
+        st.switch_page("pages/tutorBot.py")
+
+    if st.button("Student", use_container_width=True, key="student_btn"):
+        st.switch_page("pages/studentBot.py")
+
+    if st.button("Quiz", use_container_width=True, key="quiz_btn"):
+        st.switch_page("pages/quizGenerator.py")
