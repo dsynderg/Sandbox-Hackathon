@@ -3,10 +3,13 @@ import streamlit as st
 from openai import OpenAI
 from pathlib import Path
 
-# Apply Times New Roman font to buttons
+# Apply Times New Roman font to all text
 st.markdown("""
     <style>
-    button {
+    * {
+        font-family: "Times New Roman", Times, serif !important;
+    }
+    button, input, textarea {
         font-family: "Times New Roman", Times, serif !important;
     }
     </style>
