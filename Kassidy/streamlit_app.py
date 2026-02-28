@@ -44,7 +44,7 @@ st.write("")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:
-    if st.button("Tutor", use_container_width=True, key="tutor_btn"):
+    if st.button("Teacher", use_container_width=True, key="tutor_btn"):
         st.switch_page("pages/tutorBot.py")
 
     if st.button("Student", use_container_width=True, key="student_btn"):

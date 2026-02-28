@@ -34,7 +34,7 @@ for message in st.session_state.student_messages:
         st.markdown(message["content"])
 
 # React to user input
-if prompt := st.chat_input("What is on your mind?"):
+if prompt := st.chat_input("Teach me something!"):
     # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)

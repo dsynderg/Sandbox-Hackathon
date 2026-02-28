@@ -6,7 +6,7 @@ from openai import OpenAI
 if st.button("← Back to Home"):
     st.switch_page("streamlit_app.py")
 
-st.title("Quiz Generator")
+st.title("✏️ Quiz Generator")
 
 # Get API key from session state (user input) only, or fall back to environment/secrets for local dev
 API_KEY = st.session_state.get("user_api_key", None)
@@ -34,7 +34,7 @@ for message in st.session_state.quiz_messages:
         st.markdown(message["content"])
 
 # React to user input
-if prompt := st.chat_input("What is on your mind?"):
+if prompt := st.chat_input("Quiz yourself!"):
     # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)

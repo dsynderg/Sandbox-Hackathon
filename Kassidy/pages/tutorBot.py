@@ -7,7 +7,7 @@ from pathlib import Path
 if st.button("← Back to Home", key="back_tutor"):
     st.switch_page("streamlit_app.py")
 
-st.title("🤖 Tutor Chatbot")
+st.title("🤖 Teacher Chatbot")
 
 # Load system prompt from hardcoded markdown file path
 try:
@@ -45,7 +45,7 @@ for message in st.session_state.tutor_messages:
         st.markdown(message["content"])
 
 # React to user input
-if prompt := st.chat_input("What is on your mind?"):
+if prompt := st.chat_input("Ask a Question!"):
     # Display user message
     with st.chat_message("user"):
         st.markdown(prompt)
