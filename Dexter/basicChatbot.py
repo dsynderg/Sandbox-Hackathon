@@ -106,7 +106,33 @@ def _main_gradio(agent_args):
     reasoning_view = gr.Markdown('', elem_id='reasoning-md')
     usage_view = gr.Markdown('')
 
-    with gr.Blocks(css=css, theme=gr.themes.Monochrome()) as demo:
+    mathjax_script = """
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+        displayMath: [['$$', '$$'], ['\\\\[', '\\\\]'], ['[', ']']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      startup: {
+        pageReady: async () => {
+          await MathJax.typesetPromise();
+          const observer = new MutationObserver(async (mutations) => {
+            await MathJax.typesetPromise();
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+    </script>
+    """
+
+    with gr.Blocks(css=css, theme=gr.themes.Monochrome(), head=mathjax_script) as demo:
         agent = gr.State()
 
         async def get_response(message, chat_view_history, agent):
